@@ -113,3 +113,56 @@ print("\nProbabilità di abbandono:")
 print(Y_pred)
 
 print("\nDimensioni:", Y_pred.shape)
+
+
+
+# BINARY CROSS-ENTROPY
+
+def binary_cross_entropy(y_true, y_pred):
+
+    # Evitiamo di calcolare log(0)
+    epsilon = 1e-12
+
+    # Manteniamo le probabilità lontane da 0 e 1 esatti
+    y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
+
+    # Calcolo della loss per ogni cliente
+    loss = -(
+        y_true * np.log(y_pred)
+        + (1 - y_true) * np.log(1 - y_pred)
+    )
+
+    # Media della loss
+    return np.mean(loss)
+
+
+# Confronto tra le predizioni e le etichette reali
+loss = binary_cross_entropy(Y, Y_pred)
+
+print("\nBinary Cross-Entropy:", loss)
+
+
+
+
+# BACKPROPAGATION - OUTPUT LAYER
+
+# Numero di clienti
+m = X.shape[0]
+
+# Errore rispetto ai logit di output
+dZ2 = (Y_pred - Y) / m
+
+# Gradiente dei 4 pesi del neurone di output
+dW2 = A1.T @ dZ2
+
+# Gradiente del bias di output
+db2 = np.sum(dZ2, axis=0, keepdims=True)
+
+print("\nGradiente W2:")
+print(dW2)
+
+print("\nGradiente b2:")
+print(db2)
+
+print("\nDimensioni dW2:", dW2.shape)
+print("Dimensioni db2:", db2.shape)
