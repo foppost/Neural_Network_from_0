@@ -1,0 +1,1 @@
+print("La mia prima rete neurale")
