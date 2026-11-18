@@ -86,3 +86,30 @@ print(Z1[0])
 
 print("\nPrimo cliente - dopo ReLU:")
 print(A1[0])
+
+
+
+
+# OUTPUT LAYER
+
+# 4 input provenienti dall'hidden layer
+# 1 neurone di output
+W2 = rng.standard_normal((4, 1)) * np.sqrt(1 / 4)
+
+# Un bias per il neurone di output
+b2 = np.zeros((1, 1))
+
+# Predittore lineare
+Z2 = A1 @ W2 + b2
+
+# Funzione di attivazione Sigmoid
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+# Probabilità previste
+Y_pred = sigmoid(Z2)
+
+print("\nProbabilità di abbandono:")
+print(Y_pred)
+
+print("\nDimensioni:", Y_pred.shape)
